@@ -51,6 +51,21 @@ const Home = () => {
 		addTask(newTask)
 	  }
 
+	  const clearAllTasks = async () => {
+		try {
+			let response = await fetch(
+				"https://playground.4geeks.com/apis/fake/todos/user/gonchip",
+				{
+					method: "DELETE",
+				}
+			);
+
+			if (response.ok) {
+				setTodos([]);
+			}
+		} catch (error) {}
+	};
+
 	  useEffect(() => {
 		getTask();
 	  }, []);
@@ -80,6 +95,8 @@ const Home = () => {
               <li className="num-tareas">{todos.length} tareas pendientes</li>
 
 			</ul>
+
+			<button onClick={clearAllTasks}>Limpiar todas las tareas</button>
 			
 		</div>
 	);

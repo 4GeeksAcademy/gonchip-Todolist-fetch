@@ -57,3 +57,8 @@ input:focus {
     font-size: large;
     color: grey;
 }
+
+button {
+    margin: 10px;
+    background-color: rgb(224, 223, 223);
+}
