@@ -1,12 +1,59 @@
-
-/* 
-
-    You can write your own styles here...
+body {
+    font-family: 'Raleway', sans-serif;
+    margin-top: 100px;
+    width: 100%;
+    background-color: rgb(242, 243, 243);
+    font-size: x-large;
     
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+}
 
-*/
+ul li {
+    list-style: none;
+    padding: 5px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 30px;
+    background-color: white;
+    box-shadow: 1px 0px 17px -1px rgba(0,0,0,0.30);
+}
+
+ul {
+    padding: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    border: none;
+    width: 100%;
+}
+
+.red-mark {
+    color: black; 
+    cursor: pointer; 
+    transition: color 0.3s; 
+}
+  
+.red-mark:hover {
+    color: red; 
+}
+
+.container {
+    max-width: 400px; 
+}
+
+input:focus {
+    outline: none; 
+}
+
+.num-tareas {
+    padding: 0;
+    padding-left: 10px;
+    font-size: large;
+    color: grey;
+}
