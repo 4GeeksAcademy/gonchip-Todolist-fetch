@@ -51,20 +51,24 @@ const Home = () => {
 		addTask(newTask)
 	  }
 
-	  const clearAllTasks = async () => {
+	  async function deleteAll() {
 		try {
-			let response = await fetch(
-				"https://playground.4geeks.com/apis/fake/todos/user/gonchip",
-				{
-					method: "DELETE",
+			let response = await fetch ("https://playground.4geeks.com/apis/fake/todos/user/gonchip",
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
 				}
-			);
+			})
 
-			if (response.ok) {
-				setTodos([]);
+
+			if (response.ok){
+				getTask()
 			}
-		} catch (error) {}
-	};
+		} catch (error) {
+			
+		}
+	  }
 
 	  useEffect(() => {
 		getTask();
@@ -96,7 +100,7 @@ const Home = () => {
 
 			</ul>
 
-			<button onClick={clearAllTasks}>Limpiar todas las tareas</button>
+			<button onClick={deleteAll}>Limpiar todas las tareas</button>
 			
 		</div>
 	);
