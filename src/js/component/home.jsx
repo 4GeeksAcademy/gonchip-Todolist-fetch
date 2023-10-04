@@ -13,18 +13,16 @@ const Home = () => {
 
 	const getTask = async () => {
 		try {
-		  let response = await fetch("https://playground.4geeks.com/apis/fake/todos/user/gonchip");
+		  let response = await fetch("https://playground.4geeks.com/apis/fake/todos/user/gonchip")
 		  let data = await response.json()
 
-		  if (response.ok) {
-			setTodos(data)
-		  } 
+		   if (response.ok) {
+		 	setTodos(data)
+		   } 
 
 		  if (response.status == 404){
 			createUser()
 		  }
-
-		  console.log(response)
 
 		} catch (error) {
 		  console.log(error)
@@ -45,7 +43,7 @@ const Home = () => {
 				getTask()
 			}
 		} catch (error) {
-			
+			console.log(error)
 		}
 	  }
 
@@ -64,7 +62,7 @@ const Home = () => {
 			}
 
 		} catch (error) {
-			
+			console.error(error)
 		}
 	  }
 
@@ -75,25 +73,30 @@ const Home = () => {
 
 	  async function deleteAll() {
 		try {
-			let response = await fetch ("https://playground.4geeks.com/apis/fake/todos/user/gonchip",
+		  let response = await fetch(
+			"https://playground.4geeks.com/apis/fake/todos/user/gonchip",
 			{
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json"
-				}
-			})
-
-
-			if (response.ok){
-				getTask()
+			  method: "DELETE",
+			  headers: {
+				"Content-Type": "application/json",
+			  },
 			}
+		  );
+	  
+		  if (response.ok) {
+			// Después de borrar todas las tareas, crea el usuario nuevamente
+			await createUser()
+			setTodos([])
+		  }
 		} catch (error) {
-			
+		  console.error(error)
 		}
 	  }
 
+
+
 	  useEffect(() => {
-		getTask();
+		getTask()
 	  }, []);
 
 	return (
