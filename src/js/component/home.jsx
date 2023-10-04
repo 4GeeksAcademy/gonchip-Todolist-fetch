@@ -20,12 +20,34 @@ const Home = () => {
 			setTodos(data)
 		  } 
 
+		  if (response.status == 404){
+			createUser()
+		  }
+
 		  console.log(response)
 
 		} catch (error) {
 		  console.log(error)
 		}
 	  };
+
+	  const createUser = async () => {
+		try {
+			let response = await fetch("https://playground.4geeks.com/apis/fake/todos/user/gonchip",{
+				method:"POST",
+				headers:{
+					"Content-Type":"application/json"
+				},
+				body:JSON.stringify(data)
+			})
+
+			if (response.ok){
+				getTask()
+			}
+		} catch (error) {
+			
+		}
+	  }
 
 	  const addTask = async (data) => {
 		try {
