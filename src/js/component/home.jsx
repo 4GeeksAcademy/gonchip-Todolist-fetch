@@ -3,27 +3,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
 const Home = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState("")
+  const [todos, setTodos] = useState([])
 
   const getTask = async () => {
     try {
       let response = await fetch(
         "https://playground.4geeks.com/apis/fake/todos/user/gonchip"
       );
-      let data = await response.json();
+      let data = await response.json()
 
       if (response.ok) {
         setTodos(data.todos || []); 
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const createUser = async () => {
     try {
-      const data = { todos: [] };
+      const data = { todos: [] }
       let response = await fetch(
         "https://playground.4geeks.com/apis/fake/todos/user/gonchip",
         {
@@ -33,16 +33,16 @@ const Home = () => {
           },
           body: JSON.stringify(data),
         }
-      );
+      )
 
       if (response.ok) {
-		getTask();
+		getTask()
 	  } else {
 	  }
 	} catch (error) {
 
 	}
-  };
+  }
 
   const addTask = async (data) => {
     try {
@@ -55,20 +55,20 @@ const Home = () => {
           },
           body: JSON.stringify({ todos: data }),
         }
-      );
+      )
 
       if (response.ok) {
-        getTask();
+        getTask()
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const deleteTask = (id) => {
     const newTask = todos.filter((t, currentIndex) => id !== currentIndex);
-    addTask(newTask);
-  };
+    addTask(newTask)
+  }
 
   async function deleteAll() {
     try {
@@ -80,19 +80,20 @@ const Home = () => {
             "Content-Type": "application/json",
           },
         }
-      );
+      )
 
       if (response.status == 400) {
-        setTodos([]);
+        setTodos([])
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
   useEffect(() => {
-    getTask();
-  }, []);
+    getTask()
+    createUser()
+  }, [])
 
   return (
     <div className="container">
@@ -106,8 +107,8 @@ const Home = () => {
             value={inputValue}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                const newTodos = [...todos, { label: inputValue, done: false }];
-                addTask(newTodos);
+                const newTodos = [...todos, { label: inputValue, done: false }]
+                addTask(newTodos)
               }
             }}
           />
@@ -131,4 +132,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home
