@@ -13,8 +13,8 @@ const Home = () => {
       );
       let data = await response.json()
 
-      if (response.ok) {
-        setTodos(data.todos || []); 
+      if (response.status == 404) {
+        setTodos(data); 
       }
     } catch (error) {
       console.log(error)
@@ -23,7 +23,6 @@ const Home = () => {
 
   const createUser = async () => {
     try {
-      const data = { todos: [] }
       let response = await fetch(
         "https://playground.4geeks.com/apis/fake/todos/user/gonchip",
         {
@@ -31,7 +30,7 @@ const Home = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify([]),
         }
       )
 
@@ -53,7 +52,7 @@ const Home = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ todos: data }),
+          body: JSON.stringify(data),
         }
       )
 
@@ -75,15 +74,15 @@ const Home = () => {
       let response = await fetch(
         "https://playground.4geeks.com/apis/fake/todos/user/gonchip",
         {
-          method: "PUT",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
         }
       )
 
-      if (response.status == 400) {
-        setTodos([])
+      if (response.ok) {
+        getTask()
       }
     } catch (error) {
       console.error(error)
@@ -92,7 +91,6 @@ const Home = () => {
 
   useEffect(() => {
     getTask()
-    createUser()
   }, [])
 
   return (
