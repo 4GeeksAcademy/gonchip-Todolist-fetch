@@ -14,7 +14,10 @@ const Home = () => {
       let data = await response.json()
 
       if (response.status == 404) {
-        setTodos(data); 
+        createUser()
+      }
+      if (response.ok) {
+        setTodos(data)
       }
     } catch (error) {
       console.log(error)
@@ -39,7 +42,7 @@ const Home = () => {
 	  } else {
 	  }
 	} catch (error) {
-
+    console.log(error)
 	}
   }
 
